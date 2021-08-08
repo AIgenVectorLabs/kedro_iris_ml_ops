@@ -55,7 +55,7 @@ def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, 
     data = pd.get_dummies(data, columns=["target"], prefix="", prefix_sep="")
 
     # Shuffle all the data
-    data = data.sample(frac=1).reset_index(drop=True)
+    data = data.sample(frac=1, random_state=42).reset_index(drop=True)
 
     # Split to training and testing data
     n = data.shape[0]
@@ -76,3 +76,19 @@ def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, 
         test_x=test_data_x,
         test_y=test_data_y,
     )
+
+
+def predict_input_validation(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Function that verifies presence and order of all features in prediction input
+    """
+
+    feature_columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
+
+    # Assert that all features included in prediction set
+    assert all([feature in data.columns for feature in feature_columns])
+
+    # Reorder input columns to match training set
+    data = data[feature_columns]
+
+    return data

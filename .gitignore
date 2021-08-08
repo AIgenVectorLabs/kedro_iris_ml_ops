@@ -113,3 +113,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 conf/local/credentials.yml
+
+.DS_Store
+.idea/
+*.pkl

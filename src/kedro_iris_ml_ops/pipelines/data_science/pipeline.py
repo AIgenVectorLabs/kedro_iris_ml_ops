@@ -37,7 +37,7 @@ from kedro.pipeline import Pipeline, node
 from .nodes import predict, report_accuracy, train_model
 
 
-def create_pipeline(**kwargs):
+def create_train_pipeline(**kwargs):
     return Pipeline(
         [
             node(
@@ -58,5 +58,18 @@ def create_pipeline(**kwargs):
                 None,
                 name="report",
             ),
+        ]
+    )
+
+
+def create_predict_pipeline(**kwargs):
+    return Pipeline(
+        [
+            node(
+                predict,
+                dict(model="example_model", test_x="predict_df"),
+                "predictions",
+                name="predict",
+            )
         ]
     )
