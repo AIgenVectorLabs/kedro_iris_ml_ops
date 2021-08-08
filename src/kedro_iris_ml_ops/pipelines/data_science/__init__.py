@@ -32,4 +32,4 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 """
 
 from .pipeline import create_train_pipeline  # NOQA
-from .pipeline import create_predict_pipeline # NOQAß
+from .pipeline import create_predict_pipeline  # NOQAß

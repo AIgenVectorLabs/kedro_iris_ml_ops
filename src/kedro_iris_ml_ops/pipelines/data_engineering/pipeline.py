@@ -34,10 +34,7 @@ Delete this when you start working on your own Kedro project.
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import (
-    split_data,
-    predict_input_validation
-)
+from .nodes import split_data, predict_input_validation
 
 
 def create_train_pipeline(**kwargs):
@@ -61,10 +58,6 @@ def create_train_pipeline(**kwargs):
 def create_predict_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                predict_input_validation,
-                "params:prediction_input",
-                "predict_df"
-            ),
+            node(predict_input_validation, "params:prediction_input", "predict_df"),
         ]
     )

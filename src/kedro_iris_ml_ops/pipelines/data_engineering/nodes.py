@@ -83,15 +83,10 @@ def predict_input_validation(data: pd.DataFrame) -> pd.DataFrame:
     Function that verifies presence and order of all features in prediction input
     """
 
-    feature_columns = [
-        "sepal_length",
-        "sepal_width",
-        "petal_length",
-        "petal_width"
-    ]
+    feature_columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
 
     # Assert that all features included in prediction set
-    assert(all([feature in data.columns for feature in feature_columns]))
+    assert all([feature in data.columns for feature in feature_columns])
 
     # Reorder input columns to match training set
     data = data[feature_columns]

@@ -40,18 +40,15 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from src.kedro_iris_ml_ops.pipelines.data_engineering.nodes import predict_input_validation
+from src.kedro_iris_ml_ops.pipelines.data_engineering.nodes import (
+    predict_input_validation,
+)
 
 
 @pytest.fixture
 def expected_columns():
     # Define the expected order of columns
-    expected_columns = [
-        "sepal_length",
-        "sepal_width",
-        "petal_length",
-        "petal_width"
-    ]
+    expected_columns = ["sepal_length", "sepal_width", "petal_length", "petal_width"]
     return expected_columns
 
 
@@ -65,7 +62,7 @@ def expected_df():
         "sepal_length": [5.1, 5.0, 4.5, 4.8, 6.2, 1],
         "sepal_width": [3.2, 3.3, 3.5, 3.7, 3.2, 1],
         "petal_length": [1.3, 1.3, 1.4, 1.4, 5.2, 1],
-        "petal_width": [0.2, 0.2, 0.2, 0.2, 2.0, 1]
+        "petal_width": [0.2, 0.2, 0.2, 0.2, 2.0, 1],
     }
 
     # Create a Pandas data frame
@@ -91,7 +88,9 @@ def unexpected_df(expected_df, expected_columns):
 
 # Test ordering of columns by function predict_input_validation():
 class TestPredictInputValidationNode:
-    def test_predict_input_validation_on_expected_df(self, expected_df, expected_columns):
+    def test_predict_input_validation_on_expected_df(
+        self, expected_df, expected_columns
+    ):
 
         test_output_df = predict_input_validation(expected_df)
         actual_columns = test_output_df.columns
@@ -100,7 +99,9 @@ class TestPredictInputValidationNode:
         assert len(actual_columns) == len(expected_columns)
         assert all([a == b for a, b in zip(actual_columns, expected_columns)])
 
-    def test_predict_input_validation_on_unexpected_df(self, unexpected_df, expected_columns):
+    def test_predict_input_validation_on_unexpected_df(
+        self, unexpected_df, expected_columns
+    ):
 
         test_output_df = predict_input_validation(unexpected_df)
         actual_columns = test_output_df.columns
