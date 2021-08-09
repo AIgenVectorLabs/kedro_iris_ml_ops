@@ -48,8 +48,8 @@ def train_model(
     conf/project/parameters.yml. All of the data as well as the parameters
     will be provided to this function at the time of execution.
     """
-    num_iter = parameters["example_num_train_iter"]
-    lr = parameters["example_learning_rate"]
+    num_iter = parameters["num_train_iter"]
+    lr = parameters["learning_rate"]
     X = train_x.to_numpy()
     Y = train_y.to_numpy()
 

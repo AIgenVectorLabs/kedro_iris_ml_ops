@@ -34,7 +34,7 @@ Delete this when you start working on your own Kedro project.
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import split_data, predict_input_validation
+from .nodes import split_data, predict_input_validation, train_standard_scaler, apply_standard_scaler
 
 
 def create_train_pipeline(**kwargs):
@@ -42,15 +42,33 @@ def create_train_pipeline(**kwargs):
         [
             node(
                 split_data,
-                ["example_iris_data", "params:example_test_data_ratio"],
+                ["iris_data", "params:test_data_ratio"],
                 dict(
-                    train_x="example_train_x",
-                    train_y="example_train_y",
-                    test_x="example_test_x",
-                    test_y="example_test_y",
+                    train_x="train_x",
+                    train_y="train_y",
+                    test_x="test_x",
+                    test_y="test_y",
                 ),
                 name="split",
-            )
+            ),
+
+            node(
+                train_standard_scaler,
+                "train_x",
+                "scaler"
+            ),
+
+            node(
+                apply_standard_scaler,
+                dict(data="train_x", scaler="scaler"),
+                "scaled_train_x"
+            ),
+
+            node(
+                apply_standard_scaler,
+                dict(data="test_x", scaler="scaler"),
+                "scaled_test_x"
+            ),
         ]
     )
 
@@ -59,5 +77,10 @@ def create_predict_pipeline(**kwargs):
     return Pipeline(
         [
             node(predict_input_validation, "params:prediction_input", "predict_df"),
+            node(
+                apply_standard_scaler,
+                dict(data="predict_df", scaler="scaler"),
+                "scaled_predict_df"
+            ),
         ]
     )
