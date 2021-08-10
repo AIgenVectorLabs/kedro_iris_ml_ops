@@ -42,21 +42,21 @@ def create_train_pipeline(**kwargs):
         [
             node(
                 train_model,
-                ["example_train_x", "example_train_y", "parameters"],
-                "example_model",
-                name="train",
+                ["scaled_train_x", "train_y", "parameters"],
+                "model",
+                name="train_model",
             ),
             node(
                 predict,
-                dict(model="example_model", test_x="example_test_x"),
-                "example_predictions",
+                dict(model="model", test_x="scaled_test_x"),
+                "test_predictions",
                 name="predict",
             ),
             node(
                 report_accuracy,
-                ["example_predictions", "example_test_y"],
+                ["test_predictions", "test_y"],
                 None,
-                name="report",
+                name="report_accuracy",
             ),
         ]
     )
@@ -67,7 +67,7 @@ def create_predict_pipeline(**kwargs):
         [
             node(
                 predict,
-                dict(model="example_model", test_x="predict_df"),
+                dict(model="model", test_x="scaled_predict_df"),
                 "predictions",
                 name="predict",
             )

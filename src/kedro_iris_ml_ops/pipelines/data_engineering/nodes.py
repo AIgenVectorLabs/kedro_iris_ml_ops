@@ -34,6 +34,7 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 from typing import Any, Dict
 
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 
 def split_data(data: pd.DataFrame, example_test_data_ratio: float) -> Dict[str, Any]:
@@ -92,3 +93,35 @@ def predict_input_validation(data: pd.DataFrame) -> pd.DataFrame:
     data = data[feature_columns]
 
     return data
+
+
+def train_standard_scaler(data: pd.DataFrame) -> StandardScaler:
+    """
+    StandardScaler from sklearn transforms each column to have zero mean and unit variance
+    :param data:
+    :return:
+    """
+
+    # Initialize standard scaler
+    scaler = StandardScaler()
+
+    # Fit
+    scaler.fit(data)
+
+    return scaler
+
+
+def apply_standard_scaler(data: pd.DataFrame, scaler: StandardScaler) -> pd.DataFrame:
+    """
+
+    :param data:
+    :param scaler:
+    :return:
+    """
+
+    # Transform data to mean zero with unit variance
+    scaled_data = scaler.transform(data)
+    # Convert to pandas dataframe
+    scaled_data_df = pd.DataFrame(scaled_data)
+
+    return scaled_data_df
