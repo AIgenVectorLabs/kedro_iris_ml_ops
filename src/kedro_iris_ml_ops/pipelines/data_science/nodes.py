@@ -90,7 +90,7 @@ def predict(model: np.ndarray, test_x: pd.DataFrame) -> np.ndarray:
     return np.argmax(result, axis=1)
 
 
-def report_accuracy(predictions: np.ndarray, test_y: pd.DataFrame) -> None:
+def report_accuracy(predictions: np.ndarray, test_y: pd.DataFrame) -> float:
     """Node for reporting the accuracy of the predictions performed by the
     previous node. Notice that this function has no outputs, except logging.
     """
@@ -101,6 +101,8 @@ def report_accuracy(predictions: np.ndarray, test_y: pd.DataFrame) -> None:
     # Log the accuracy of the model
     log = logging.getLogger(__name__)
     log.info("Model accuracy on test set: %0.2f%%", accuracy * 100)
+
+    return accuracy
 
 
 def _sigmoid(z):

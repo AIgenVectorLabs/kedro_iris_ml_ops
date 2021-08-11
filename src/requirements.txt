@@ -6,6 +6,8 @@
 #
 aiofiles==0.6.0
     # via kedro-viz
+alembic==1.4.1
+    # via mlflow
 anyconfig==0.10.1
     # via kedro
 anyio==3.3.0
@@ -52,34 +54,55 @@ click==7.1.2
     # via
     #   black
     #   cookiecutter
+    #   databricks-cli
+    #   flask
     #   kedro
     #   kedro-telemetry
+    #   mlflow
     #   pip-tools
     #   uvicorn
+cloudpickle==1.6.0
+    # via mlflow
 cookiecutter==1.7.3
     # via kedro
 coverage==5.5
     # via pytest-cov
+databricks-cli==0.15.0
+    # via mlflow
 debugpy==1.4.1
     # via ipykernel
 decorator==5.0.9
     # via ipython
 defusedxml==0.7.1
     # via nbconvert
+docker==5.0.0
+    # via mlflow
 dynaconf==3.1.4
     # via kedro
 entrypoints==0.3
-    # via nbconvert
+    # via
+    #   mlflow
+    #   nbconvert
 fastapi==0.66.1
     # via kedro-viz
 flake8==3.9.2
     # via -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
+flask==2.0.1
+    # via
+    #   mlflow
+    #   prometheus-flask-exporter
 fsspec==0.8.7
     # via kedro
 gitdb==4.0.7
     # via gitpython
 gitpython==3.1.18
-    # via kedro
+    # via
+    #   kedro
+    #   mlflow
+greenlet==1.1.1
+    # via sqlalchemy
+gunicorn==20.1.0
+    # via mlflow
 h11==0.12.0
     # via uvicorn
 idna==2.10
@@ -114,6 +137,8 @@ ipywidgets==7.6.3
     # via jupyter
 isort==5.9.3
     # via -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
+itsdangerous==2.0.1
+    # via flask
 jedi==0.18.0
     # via ipython
 jinja2-time==0.2.0
@@ -121,6 +146,7 @@ jinja2-time==0.2.0
 jinja2==3.0.1
     # via
     #   cookiecutter
+    #   flask
     #   jinja2-time
     #   jupyter-server
     #   jupyterlab
@@ -182,8 +208,12 @@ kedro[pandas.csvdataset]==0.17.4
     #   -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
     #   kedro-telemetry
     #   kedro-viz
+mako==1.1.4
+    # via alembic
 markupsafe==2.0.1
-    # via jinja2
+    # via
+    #   jinja2
+    #   mako
 matplotlib-inline==0.1.2
     # via
     #   ipykernel
@@ -192,6 +222,8 @@ mccabe==0.6.1
     # via flake8
 mistune==0.8.4
     # via nbconvert
+mlflow==1.19.0
+    # via -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
 mypy-extensions==0.4.3
     # via black
 nbclassic==0.3.1
@@ -223,6 +255,7 @@ notebook==6.4.2
 numpy==1.19.5
     # via
     #   -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
+    #   mlflow
     #   pandas
     #   scikit-learn
     #   scipy
@@ -231,9 +264,12 @@ packaging==21.0
     #   bleach
     #   jupyterlab
     #   jupyterlab-server
+    #   mlflow
     #   pytest
 pandas==1.3.1
-    # via kedro
+    # via
+    #   kedro
+    #   mlflow
 pandocfilters==1.4.3
     # via nbconvert
 parso==0.8.2
@@ -256,10 +292,15 @@ prometheus-client==0.11.0
     # via
     #   jupyter-server
     #   notebook
+    #   prometheus-flask-exporter
+prometheus-flask-exporter==0.18.2
+    # via mlflow
 prompt-toolkit==3.0.19
     # via
     #   ipython
     #   jupyter-console
+protobuf==3.17.3
+    # via mlflow
 ptyprocess==0.7.0
     # via
     #   pexpect
@@ -296,9 +337,12 @@ pytest==6.2.4
     #   pytest-mock
 python-dateutil==2.8.2
     # via
+    #   alembic
     #   arrow
     #   jupyter-client
     #   pandas
+python-editor==1.0.4
+    # via alembic
 python-json-logger==2.0.2
     # via kedro
 python-slugify==5.0.2
@@ -306,11 +350,13 @@ python-slugify==5.0.2
 pytz==2021.1
     # via
     #   babel
+    #   mlflow
     #   pandas
 pyyaml==5.4.1
     # via
     #   kedro
     #   kedro-telemetry
+    #   mlflow
 pyzmq==22.2.1
     # via
     #   jupyter-client
@@ -321,6 +367,8 @@ qtconsole==5.1.1
     # via jupyter
 qtpy==1.9.0
     # via qtconsole
+querystring-parser==1.2.4
+    # via mlflow
 regex==2021.8.3
     # via black
 requests-unixsocket==0.2.0
@@ -328,8 +376,11 @@ requests-unixsocket==0.2.0
 requests==2.25.1
     # via
     #   cookiecutter
+    #   databricks-cli
+    #   docker
     #   jupyterlab-server
     #   kedro-telemetry
+    #   mlflow
     #   requests-unixsocket
 scikit-learn==0.24.2
     # via -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
@@ -346,14 +397,25 @@ six==1.16.0
     #   argon2-cffi
     #   bleach
     #   cookiecutter
+    #   databricks-cli
     #   jsonschema
+    #   protobuf
     #   python-dateutil
+    #   querystring-parser
 smmap==4.0.0
     # via gitdb
 sniffio==1.2.0
     # via anyio
+sqlalchemy==1.4.22
+    # via
+    #   alembic
+    #   mlflow
+sqlparse==0.4.1
+    # via mlflow
 starlette==0.14.2
     # via fastapi
+tabulate==0.8.9
+    # via databricks-cli
 terminado==0.10.1
     # via
     #   jupyter-server
@@ -409,7 +471,11 @@ wcwidth==0.2.5
 webencodings==0.5.1
     # via bleach
 websocket-client==1.1.1
-    # via jupyter-server
+    # via
+    #   docker
+    #   jupyter-server
+werkzeug==2.0.1
+    # via flask
 wheel==0.36.2
     # via -r /Users/djacques/Documents/GitHub/kedro_iris_ml_ops/src/requirements.in
 widgetsnbextension==3.5.1
