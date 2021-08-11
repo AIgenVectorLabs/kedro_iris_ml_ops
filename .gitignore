@@ -114,6 +114,7 @@ dmypy.json
 .pyre/
 conf/local/credentials.yml
 
+/logs
 .DS_Store
 .idea/
 *.pkl

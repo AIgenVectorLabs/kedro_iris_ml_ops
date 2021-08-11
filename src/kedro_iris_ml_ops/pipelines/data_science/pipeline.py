@@ -55,7 +55,7 @@ def create_train_pipeline(**kwargs):
             node(
                 report_accuracy,
                 ["test_predictions", "test_y"],
-                None,
+                "test_accuracy",
                 name="report_accuracy",
             ),
         ]
